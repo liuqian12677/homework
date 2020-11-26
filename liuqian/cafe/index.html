@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Tuxedo Cat Coffee</title>
+	<link type="text/css" rel="stylesheet" href="cafe.css">
+	<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<header>
+		<img src="images/logo.png" alt="Tuxedo Cat Coffee" />
+	</header>
+	<main>
+		<form id="order_form" name="order_form" action="checkout.html" method="get">
+			<section id="menu">
+				<h2>Menu</h2>
+				<p>Click an item to add it to your order.</p>
+				<ul>
+					<li><a href="#"><img id="images/espresso_info.jpg" src="images/espresso.jpg" alt="espresso" /></a></li>
+					<li><a href="#"><img id="images/latte_info.jpg" src="images/latte.jpg" alt="latte" /></a></li>
+					<li><a href="#"><img id="images/cappuccino_info.jpg" src="images/cappuccino.jpg" alt="cappuccino" /></a></li>
+					<li><a href="#"><img id="images/coffee_info.jpg" src="images/coffee.jpg" alt="coffee" /></a></li>
+					<li><a href="#"><img id="images/biscotti_info.jpg" src="images/biscotti.jpg" alt="biscotti" /></a></li>
+					<li><a href="#"><img id="images/scone_info.jpg" src="images/scone.jpg" alt="scone" /></a></li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Your Order</h2>
+				<section>
+					<select id="order" name="order" size="6">
+					</select>
+					<p id="total">&nbsp;</p>
+				</section>
+				<section id="buttons">
+					<input type="button" name="place_order" id="place_order" value="Place Order">
+					<input type="button" name="clear_order" id="clear_order" value="Clear Order">
+				</section>
+			</section>
+		</form>
+	</main>
+
+	<script>
+		var data = [
+			{
+				id: 1,
+				name: 'Espresso',
+				price: '1.95',
+			}, {
+				id: 2,
+				name: 'Latte',
+				price: '2.95',
+			}, {
+				id: 3,
+				name: 'Cappuccino',
+				price: '3.45',
+			}, {
+				id: 4,
+				name: 'Drip coffee',
+				price: '1.75',
+			}, {
+				id: 5,
+				name: 'Biscotti',
+				price: '1.95',
+			}, {
+				id: 6,
+				name: 'Scone',
+				price: '2.95',
+			}
+		];
+		var result = [];
+		var total = 0;
+		$('ul li img').hover((e) => {
+			var src = e.target.src;
+			$(e.target).attr('src', e.target.id);
+			$(e.target).attr('id', src);
+		}, (e) => {
+			var src = e.target.src;
+			$(e.target).attr('src', e.target.id);
+			$(e.target).attr('id', src);
+		}).click((e) => {
+			e.preventDefault();
+			var index = $(e.target).parent().parent().index();
+			result.push(data[index]);
+			var str = '';
+			total = 0;
+			for(var i = 0; i < result.length; i ++) {
+				total += (result[i].price * 100);
+				str += `<option value="${result[i].id}">$${result[i].price} - ${result[i].name}</option>`
+			}
+			$('#order').html(str);
+			$('#total').html(`total: $${total / 100}`).css('fontSize', '18px');
+		});
+		$('#clear_order').click((e) => {
+			result = [];
+			total = 0;
+			$('#order').html('');
+			$('#total').html(`total: $${total / 100}`)
+		});
+		$('#place_order').click((e) => {
+			window.location.href = "./checkout.html";
+		})
+	</script>
+</body>
+
+</html>

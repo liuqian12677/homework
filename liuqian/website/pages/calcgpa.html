@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>calcgpa</title>
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/calcgpa.css">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="logo">
+      <h1><a href="./../index.html">COMPUTER<span>SCIENCE</span></a></h1>
+    </div>
+
+    <div id="content">
+      <ul class="menu" id="jMenu">
+        <li><a href="./../index.html">Home</a></li>
+        <li><a href="./describe.html">describe</a></li>
+        <li><a href="./recruit.html">recruit</a></li>
+        <li class="current"><a href="./calcgpa.html">calcgpa</a></li>
+      </ul>
+      <div id="search">
+        <input type="text" class="text" name="query" value="Search..." onfocus="this.value='';"
+          onblur="this.value='Search...'" />
+        <button type="button" class="submit">search</button>
+      </div>
+      <div class="x"></div>
+      <div id="content" style="padding: 20px; box-sizing: border-box;">
+        <h1 style="text-align: center;">Calculate your GPA</h1>
+        <div class="module">
+          <form class="form" style="width: 700px; min-height: 330px; margin: 0 auto;" id="form">
+            <div class="entry">
+              <input class="course" name="course" style="width: 400px;" type="text"
+                placeholder="Course Name (optional)">
+              <input class="credit" name="credit" style="width: 160px;" type="number" min="0"
+                placeholder="Credit Hours">
+              <select class="score" name="score" style="margin: 0; width: 80px;">
+                <option value="0"></option>
+                <option value="4">A</option>
+                <option value="3">B</option>
+                <option value="2">C</option>
+                <option value="1">D</option>
+                <option value="0">F</option>
+              </select>
+            </div>
+            <div class="entry">
+              <input class="course" name="course" style="width: 400px;" type="text"
+                placeholder="Course Name (optional)">
+              <input class="credit" name="credit" style="width: 160px;" type="number" min="0"
+                placeholder="Credit Hours">
+              <select class="score" name="score" style="margin: 0; width: 80px;">
+                <option value="0"></option>
+                <option value="4">A</option>
+                <option value="3">B</option>
+                <option value="2">C</option>
+                <option value="1">D</option>
+                <option value="0">F</option>
+              </select>
+            </div>
+          </form>
+          <div style="text-align: center;">
+            <button type="submit" id="add-item" class="btn" style="padding: 8px 10px;">+ Add more</button>
+            <button type="submit" id="calc-score" class="calculate-btn"
+              style="padding: 8px 10px; margin-left: 20px;">Calculate</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer">
+      <p>Copyright &copy; 2020 &middot; Design: Liu Qian &middot; Contact: +86 13807253337</p>
+    </div>
+
+    <script>
+      var $addItem = $('#add-item');
+      var $calcScore = $('#calc-score');
+      var temp = `
+      <div class="entry">
+        <input class="course" name="course" style="width: 400px;" type="text" placeholder="Course Name (optional)">
+        <input class="credit" name="credit" style="width: 160px;"  type="number" min="0" placeholder="Credit Hours">
+        <select class="score" name="score" style="margin: 0; width: 80px;">
+          <option value="0"></option>
+          <option value="4">A</option>
+          <option value="3">B</option>
+          <option value="2">C</option>
+          <option value="1">D</option>
+          <option value="0">F</option>
+        </select>
+      </div>
+      `;
+
+      $addItem.click((e) => {
+        e.preventDefault();
+        $('#form').append($(temp));
+      })
+
+      $calcScore.click((e) => {
+        e.preventDefault();
+        var total = 0;
+        var hour = 0;
+        var entryTotal = Array.from($('#form').find('.entry'));
+        entryTotal.map(item => {
+          hour += Number($(item).find('.credit').val() || 0);
+          total += ($(item).find('.credit').val() || 0) * ($(item).find('.score').val() || 0)
+        })
+        var gap = (total / hour).toFixed(2);
+        gap = isNaN(gap) ? '0.00' : gap;
+        alert('Your GPA is:' + gap);
+      })
+
+    </script>
+</body>
+
+</html>

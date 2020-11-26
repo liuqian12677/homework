@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>describe</title>
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/recruit.css">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="logo">
+      <h1><a href="./../index.html">COMPUTER<span>SCIENCE</span></a></h1>
+    </div>
+
+    <div id="content">
+      <ul class="menu" id="jMenu">
+        <li><a href="./../index.html">Home</a></li>
+        <li><a href="./describe.html">describe</a></li>
+        <li class="current"><a href="./recruit.html">recruit</a></li>
+        <li><a href="./calcgpa.html">calcgpa</a></li>
+      </ul>
+
+      <div id="search">
+        <input type="text" class="text" name="query" value="Search..." onfocus="this.value='';"
+          onblur="this.value='Search...'" />
+        <button type="button" class="submit">search</button>
+      </div>
+
+      <div class="x"></div>
+      <div id="content" style="padding: 20px; box-sizing: border-box;">
+        <h1 style="width: 100%; text-align: center;">Recruitment Notice</h1>
+        <h2 style="margin-left: 20px; text-align: center;">We want to recruit teaching assistants. If you are interested, please fill in the
+          information below to join us.</h2>
+        <form action="#" id="form">
+          <div>
+            <div>
+              <label for="name">Your full name：</label>
+              <input type="text" name="name">
+            </div>
+            <div>
+              <label for="id">Student number：</label>
+              <input type="text" name="id">
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="gender">Gender：</label>
+              <select name="gender" style="padding: 0; padding-left: 15px; float: right; margin: 0; margin-left: 5px;">
+                <option value="1">Male</option>
+                <option value="2">Famale</option>
+              </select>
+            </div>
+            <div>
+              <label for="gpa">GPA：</label>
+              <input type="number" name="gpa" min="0" max="4">
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="date">Submission Date：</label>
+              <input type="date" name="date" value="2020-11-25">
+            </div>
+            <div>
+              <label for="comment">Comments：</label>
+              <input type="text" name="comment">
+            </div>
+          </div>
+          <div>
+            <button id="submit">Submit Apply</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="footer">
+      <p>Copyright &copy; 2020 &middot; Design: Liu Qian &middot; Contact: +86 13807253337</p>
+    </div>
+
+    <script>
+      $('#submit').click((e) => {
+        e.preventDefault();
+        var $input = Array.from($('#form').find('input'));
+        for(var i = 0; i < $input.length; i ++) {
+          if(!$($input[i]).val()) {
+            alert("Please complete the information");
+            return ;
+          }
+        }
+        alert("We have received your application and will reply to you as soon as possible.")
+      })
+    </script>
+</body>
+
+
+</html>

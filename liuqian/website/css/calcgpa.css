@@ -1,0 +1,15 @@
+.entry {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.entry input {
+  padding-left: 8px;
+  box-sizing: border-box;
+  border: 1px solid;
+}
+
+.entry select {
+  border: 1px solid;
+}
